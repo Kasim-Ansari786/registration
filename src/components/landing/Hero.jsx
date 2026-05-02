@@ -3,6 +3,24 @@ import { ChefHat, Building2, GraduationCap } from "lucide-react";
 import Brand from "@/components/Brand";
 import saharaAtrium from "@/assets/sahara-star-atrium.jpg.jpeg";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
+import brochurePdf from "@/assets/A-Star_Brochure.pdf?url";
+
+const handleDownloadSyllabus = async () => {
+  const response = await fetch(brochurePdf);
+  const blob = await response.blob();
+
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "A-Star_Brochure.pdf";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  window.URL.revokeObjectURL(url);
+};
 
 const Hero = () => {
   return (
@@ -59,20 +77,19 @@ const Hero = () => {
           </div>
 
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] mb-6">
-            A Career <em className="not-italic text-gradient-gold font-semibold">Parents</em>
+            A Career <em className="not-italic text-gradient-gold font-semibold">You</em>
             <br />
             Will Be <em className="not-italic text-gradient-gold font-semibold">Proud</em> Of.
           </h1>
 
           <p className="text-lg sm:text-xl text-ivory/85 max-w-xl mb-4 font-light leading-relaxed">
             Give your child a future in the global hospitality industry through{" "}
-            <span className="text-gold">A-Star Academy</span>, powered by Sahara Star — with a written{" "}
+            <span className="text-gold">A-Star Academy</span>, powered by Hotel Sahara Star<br></br>with {" "}
             <span className="text-gold font-medium">100% job guarantee</span>.
           </p>
           <p className="text-base text-ivory/65 max-w-xl mb-8">
-            A real career, not just a degree. And unlike IT or BPO jobs, hospitality is{" "}
-            <span className="text-ivory/85 font-medium">AI-proof</span> — service, hosting and human warmth cannot be
-            automated.
+            A real career, not just a degree. Graduate with hands-on experience, professional confidence{" "}
+            <span className="text-ivory/85 font-medium">and</span> a clear career path from day one.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
@@ -80,17 +97,23 @@ const Hero = () => {
               <a href="#register">Register for Entrance Test →</a>
             </Button>
             <Button asChild variant="outline-ivory" size="xl">
-              <a href="tel:+919999999999">Speak to Counsellor</a>
+              <a
+                href={brochurePdf}
+                download="A-Star_Brochure.pdf"
+                onClick={handleDownloadSyllabus}
+              >
+                Download Syllabus
+              </a>
             </Button>
           </div>
 
           {/* Trust points */}
           <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-ivory/80">
             {[
-              "100% Job Guarantee (in writing)",
+              "100% Job Guarantee",
               "AI-proof, future-safe career",
-              "Learn inside Sahara Star",
-              "Premium campus & industry exposure",
+              "Learn inside Hotel Sahara Star",
+              "Pathway to 2.3 million Hospitality Careers",
             ].map((t) => (
               <div key={t} className="flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
@@ -138,9 +161,9 @@ const Hero = () => {
                 </p>
                 <p className="text-sm text-ivory/80 mb-4">Learn where hospitality lives</p>
                 <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-gold">
-                  <span>Chef</span>
-                  <span className="h-1 w-1 rounded-full bg-gold" />
                   <span>Hotel</span>
+                  <span className="h-1 w-1 rounded-full bg-gold" />
+                  <span>Retail</span>
                   <span className="h-1 w-1 rounded-full bg-gold" />
                   <span>Events</span>
                 </div>
@@ -152,8 +175,8 @@ const Hero = () => {
               <div className="font-display font-semibold">Sahara Star</div>
             </div>
             <div className="absolute -right-4 bottom-12 bg-gold-gradient text-navy-deep rounded-lg shadow-gold px-4 py-3 text-xs hidden sm:block">
-              <div className="font-bold text-base">100%</div>
-              <div className="uppercase tracking-wider text-[10px]">Job Guarantee</div>
+              <div className="font-bold text-base">Day Campus</div>
+              <div className="uppercase tracking-wider text-[8.6px]">Hotel Sahara Star</div>
             </div>
           </div>
         </div>
@@ -162,7 +185,7 @@ const Hero = () => {
       {/* Trust badge strip */}
       <div className="relative border-t border-gold/15 bg-navy-deep/60 backdrop-blur">
         <div className="container py-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xs sm:text-sm text-ivory/75 uppercase tracking-[0.2em]">
-          {["100% Job Guarantee", "AI-Proof Career", "Industry Linked", "Safe Campus"].map((t, i) => (
+          {["Degree Programmes", "Diploma Programmes", "Certificate Programmes", "Culinary Workshops"].map((t, i) => (
             <span key={t} className="flex items-center gap-3">
               <span>{t}</span>
               {i < 3 && <span className="h-1 w-1 rounded-full bg-gold/60" />}
